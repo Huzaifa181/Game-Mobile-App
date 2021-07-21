@@ -6,9 +6,8 @@ import {
   StyleSheet,
   useColorScheme,
   View,
+  Text,
 } from 'react-native';
-import Header from './components/Header';
-import StartGameScreen from './screens/startGameScreen';
 
 import {
   Colors,
@@ -16,22 +15,31 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {style} from 'styled-system';
 
-const App = () => {
+const Header = ({title}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <View style={styles.screen}>
-      <Header title="Huzaifa"></Header>
-      <StartGameScreen></StartGameScreen>
+    <View style={styles.header}>
+      <Text style={styles.headerTitle}>{title}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
+  header: {
+    width: '100%',
+    height: 90,
+    paddingTop: 36,
+    backgroundColor: '#f7287b',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  headerTitle: {
+    color: 'black',
+    fontSize: 18,
   },
 });
 
-export default App;
+export default Header;
