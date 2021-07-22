@@ -9,7 +9,6 @@ import {
   TextInput,
   Text,
 } from 'react-native';
-
 import {
   DebugInstructions,
   LearnMoreLinks,
@@ -17,24 +16,31 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import {style} from 'styled-system';
 import Colors from '../constants/colors';
-const Input = props => {
+import Color from 'color';
+const NumberContainer = props => {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <TextInput
-      {...props}
-      style={{...styles.input, ...props.propsStyle}}></TextInput>
+    <View style={styles.container}>
+      <Text style={styles.number}>{props.children}</Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  input: {
-    height: 35,
-    borderBottomColor: 'grey',
-    borderBottomWidth: 1,
-    padding: 0,
-    marginVertical: 20,
+  container: {
+    borderWidth: 2,
+    borderColor: Colors.accent,
+    padding: 10,
+    borderRadius: 10,
+    marginVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  number: {
+    color: Colors.accent,
+    fontSize: 22,
   },
 });
 
-export default Input;
+export default NumberContainer;

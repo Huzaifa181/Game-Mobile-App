@@ -7,6 +7,7 @@ import {
   TextInput,
   Button,
   useColorScheme,
+  Alert,
   TouchableWithoutFeedback,
   View,
   Text,
@@ -21,7 +22,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import {style} from 'styled-system';
-import colors from '../constants/colors';
+import NumberContainer from '../components/NumberContainer';
 
 const StartGameScreen = ({title}) => {
   const [enteredValue, setEnteredValue] = useState('');
@@ -37,16 +38,28 @@ const StartGameScreen = ({title}) => {
   };
   const resetConfirmHandler = () => {
     const chooseNumber = parseInt(enteredValue);
-    if (chooseNumber === NaN || chooseNumber <= 0 || chooseNumber > 99) {
+    if (isNaN(chooseNumber) || chooseNumber <= 0 || chooseNumber > 99) {
+      Alert.alert(
+        'Invalid Number',
+        'Number has to be number between 1 and 99',
+        [{text: 'Okay', style: 'destructive', onPress: resetInputHandler}],
+      );
       return;
     }
     setConfirmed(true);
     setSelectedNumber(enteredValue);
     setEnteredValue('');
+    Keyboard.dismiss();
   };
   let confirmedOutput;
   if (confirmed) {
-    confirmedOutput = <Text>Choosen Number: {selectedNumber}</Text>;
+    confirmedOutput = (
+      <Card propsStyle={styles.summaryContainer}>
+        <Text>You Selected</Text>
+        <NumberContainer>{selectedNumber}</NumberContainer>
+        <Button title="START GAME"></Button>
+      </Card>
+    );
   }
   return (
     <TouchableWithoutFeedback
@@ -62,20 +75,22 @@ const StartGameScreen = ({title}) => {
             autoCapitalize="none"
             maxLength={2}
             autoCorrect={false}
+            value={enteredValue}
             keyboardType="numeric"
+            onChangeText={numberInputHandler}
             propsStyle={styles.input}></Input>
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
               <Button
                 title="Reset"
-                color={colors.accent}
+                color={Colors.accent}
                 onPress={resetInputHandler}></Button>
             </View>
             <View style={styles.button}>
               <Button
                 onPress={resetConfirmHandler}
                 title="Confirm"
-                color={colors.primary}></Button>
+                color={Colors.primary}></Button>
             </View>
           </View>
         </Card>
@@ -104,6 +119,10 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     paddingHorizontal: 15,
+  },
+  summaryContainer: {
+    marginTop: 20,
+    alignItems: 'center',
   },
   inputContainer: {
     width: 300,
