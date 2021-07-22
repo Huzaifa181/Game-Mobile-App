@@ -3,6 +3,7 @@ import {
   SafeAreaView,
   ScrollView,
   StatusBar,
+  Dimensions,
   StyleSheet,
   useColorScheme,
   View,
@@ -23,22 +24,24 @@ const GameOverScreen = props => {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <View style={styles.screen}>
-      <Text>The Game is Over</Text>
-      <View style={styles.imageContainer}>
-        <Image
-          source={require('../assets/success.png')}
-          style={styles.image}
-          resizeMode="cover"></Image>
+    <ScrollView>
+      <View style={styles.screen}>
+        <Text>The Game is Over</Text>
+        <View style={styles.imageContainer}>
+          <Image
+            source={require('../assets/success.png')}
+            style={styles.image}
+            resizeMode="cover"></Image>
+        </View>
+        <Text style={styles.upperText}>
+          Your phone needed{' '}
+          <Text style={styles.highlight}>{props.roundsNumber}</Text> round to
+          guess number
+          <Text style={styles.highlight}> {props.userNumber}</Text>
+        </Text>
+        <Button title="NEW GAME" onPress={props.onRestart}></Button>
       </View>
-      <Text style={styles.upperText}>
-        Your phone needed{' '}
-        <Text style={styles.highlight}>{props.roundsNumber}</Text> round to
-        guess number
-        <Text style={styles.highlight}> {props.userNumber}</Text>
-      </Text>
-      <Button title="NEW GAME" onPress={props.onRestart}></Button>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -51,15 +54,16 @@ const styles = StyleSheet.create({
     color: Colors.primary,
   },
   imageContainer: {
-    marginVertical: 30,
-    width: 300,
-    height: 300,
-    borderRadius: 150,
+    marginVertical: Dimensions.get('window').height / 30,
+    width: Dimensions.get('window').width * 0.7,
+    height: Dimensions.get('window').width * 0.7,
+    borderRadius: (Dimensions.get('window').width * 0.7) / 2,
     borderWidth: 3,
     borderColor: 'black',
     overflow: 'hidden',
   },
   screen: {
+    paddingVertical: 10,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -67,7 +71,7 @@ const styles = StyleSheet.create({
   upperText: {
     fontSize: 20,
     marginHorizontal: 20,
-    marginVertical: 15,
+    marginVertical: Dimensions.get('window').height / 20,
     textAlign: 'center',
   },
 });
