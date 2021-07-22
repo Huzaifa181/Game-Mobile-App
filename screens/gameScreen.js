@@ -36,17 +36,30 @@ const GameScreen = props => {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <View>
+    <View style={styles.screen}>
       <Text>Oponent's Guess</Text>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <Card>
-        <Button title="LOWER"></Button>
-        <Button title="GREATER"></Button>
+      <Card propsStyle={styles.buttonContainer}>
+        <Button title="LOWER" onPress={() => {}}></Button>
+        <Button title="GREATER" onPress={() => {}}></Button>
       </Card>
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    padding: 10,
+    alignItems: 'center',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: 300,
+    maxWidth: '80%',
+    marginTop: 20,
+  },
+});
 
 export default GameScreen;
