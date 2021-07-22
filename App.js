@@ -10,7 +10,7 @@ import {
 import Header from './components/Header';
 import StartGameScreen from './screens/startGameScreen';
 import GameScreen from './screens/gameScreen';
-
+import GameOverScreen from './screens/GameOverScreen';
 import {
   Colors,
   DebugInstructions,
@@ -20,13 +20,23 @@ import {
 
 const App = () => {
   const [userNumber, setUserNumber] = useState();
+  const [guessRound, setGuessRound] = useState(0);
   const isDarkMode = useColorScheme() === 'dark';
   const startGameHandler = selectedNumber => {
     setUserNumber(selectedNumber);
+    setGuessRound(0);
+  };
+  const gameOverHandler = noOfRounds => {
+    console.log('huui');
+    setGuessRound(noOfRounds);
   };
   let content = <StartGameScreen onStartGame={startGameHandler} />;
-  if (userNumber) {
-    content = <GameScreen userChoice={userNumber} />;
+  if (userNumber && guessRound <= 0) {
+    content = (
+      <GameScreen userChoice={userNumber} onGameOver={gameOverHandler} />
+    );
+  } else if (guessRound > 0) {
+    content = <GameOverScreen />;
   }
   return (
     <View style={styles.screen}>
