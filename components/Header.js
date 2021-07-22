@@ -15,7 +15,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import {style} from 'styled-system';
-import Colors from '../constants/colors';
+import Colors from '../constants/colors/colors';
 const Header = ({title}) => {
   const isDarkMode = useColorScheme() === 'dark';
 

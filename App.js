@@ -26,6 +26,10 @@ const App = () => {
     setUserNumber(selectedNumber);
     setGuessRound(0);
   };
+  const configureNewGameHandler = () => {
+    setGuessRound(0);
+    setUserNumber(null);
+  };
   const gameOverHandler = noOfRounds => {
     console.log('huui');
     setGuessRound(noOfRounds);
@@ -36,7 +40,13 @@ const App = () => {
       <GameScreen userChoice={userNumber} onGameOver={gameOverHandler} />
     );
   } else if (guessRound > 0) {
-    content = <GameOverScreen />;
+    content = (
+      <GameOverScreen
+        roundsNumber={guessRound}
+        userNumber={userNumber}
+        onRestart={configureNewGameHandler}
+      />
+    );
   }
   return (
     <View style={styles.screen}>

@@ -18,7 +18,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import {style} from 'styled-system';
-import Colors from '../constants/colors';
+import Colors from '../constants/colors/colors';
 import NumberContainer from '../components/NumberContainer';
 // import {Alert} from 'native-base';
 const generateRandomBetween = (min, max, exclude) => {

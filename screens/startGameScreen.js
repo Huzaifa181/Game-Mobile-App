@@ -13,7 +13,7 @@ import {
   Text,
   Keyboard,
 } from 'react-native';
-import Colors from '../constants/colors';
+import Colors from '../constants/colors/colors';
 import Card from '../components/Card';
 import Input from '../components/Input';
 import {
